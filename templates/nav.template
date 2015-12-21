@@ -1,0 +1,38 @@
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+
+        <div class="navbar-header">
+            <a class="navbar-brand hidden-xs" href="#home">
+                <img alt="Brand" src="img/sasien-logo-sm.png">
+                <span>Sasien photography</span>
+            </a>
+            <a class="navbar-brand navbar-brand-xs hidden-lg hidden-md hidden-sm" href="#home">
+                <img alt="Brand" src="img/sasien-logo-sm.png">
+                <span>Sasien photography</span>
+            </a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li id="nav-portfolio-view" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Portfolio</a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li data-target="family"><a href="#portfolio/family">Family</a></li>
+                        <li data-target="kids"><a href="#portfolio/kids">Kids</a></li>
+                        <li data-target="maternity"><a href="#portfolio/maternity">Maternity</a></li>
+                        <li data-target="portrait"><a href="#portfolio/portrait">Portrait</a></li>
+                        <li data-target="events"><a href="#portfolio/events">Events</a></li>
+                    </ul>
+                </li>
+                <li id="nav-about-view" data-target="#about-view"><a href="#about/nl">About & contact</a></li>
+                <li id="nav-about-view" data-target="#about-view"><a href="#about/nl">About & contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

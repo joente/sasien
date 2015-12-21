@@ -1,0 +1,5 @@
+<script id="home-view" type="text/html">
+    <div class="container">
+        <div class="wall" id="wall"></div>
+    </div>
+</script>

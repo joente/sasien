@@ -1,0 +1,90 @@
+<script id="about-en-view" type="text/html">
+    <div class="container">
+        <div class="row">
+            <div class="about-container col-xs-12 col-sm-6">
+
+<p>
+Hope you are enjoying your day and thank you for visiting this web site.
+</p>
+
+<p>
+My name is Sasha and I’m a young mom with passion for photography, design and languages.
+When planning a new photo story I use my style and ideas as a background and your wishes as core.
+</p>
+
+<p>
+Do you have a special occassion like birth, first birthday, love story, are you expecting,
+giving the ‘yes‘ word or just having a nice day with dear ones? Let us capture these moments
+together since each day of our lives is special, important and worth remembering.
+</p>
+
+<p>Now you have briefly met me, and I would love to meet you.</p>
+
+<p>
+<button class="btn btn-purple" type="button" onclick="window.location.hash='about/nl'">Lees dit in het Nederlands</button>
+</p>
+
+            </div>
+            <div class="contact-container col-xs-12 col-sm-6">
+
+<img class="profile-photo" src="/img/sasha-tychkovska.jpg" alt="Sasha Tychkovska" />
+<h1>contact me</h1>
+<ul>
+    <li><a href="mailto:info@sasien.nl"><i class="fa fa-fw fa-envelope-square"></i> info@sasien.nl</a></li>
+    <li><a href="tel:+31614573883"><i class="fa fa-fw fa-phone-square"></i> +31 (0)6 1457 3883</a></li>
+    <li><a href="https://www.google.nl/maps/place/August+Vermeylenlaan+16,+5531+TW+Bladel/@51.3749127,5.2187756,17z/data=!3m1!4b1!4m2!3m1!1s0x47c6cf368393d519:0x167f72a41542c618?hl=en"><i class="fa fa-fw fa-map-marker"></i> Bladel</a></li>
+</ul>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<script id="about-nl-view" type="text/html">
+    <div class="container">
+        <div class="row">
+            <div class="about-container col-xs-12 col-sm-6">
+
+<p>
+Welkom! Ik hoop dat jij van de dag aan het genieten bent en bedankt voor je bezoek aan mijn website.
+</p>
+
+<p>
+Ik heet Sasha, en ben een jonge moeder met passie voor fotografie, grafisch design en talen.
+Als ik een nieuw foto-verhaal aan het bedenken ben, gebruik ik mijn style en ideen
+als achtergrond en jou wensen als onderwerp.
+</p>
+
+<p>
+Gaat er iets specials in je leven gebeuren: geboorte, eerste verjaardag van je kindje, liefde verhaal,
+ben jij in verwachting, ga jij het "JA" woordje zeggen of heb jij misschien een geweldige dag met je dierbare?
+Zulke momenten zijn om nooit te vergeten en om op te zetten in een foto-verhaal. Dat zou ik graag samen met je doen.
+</p>
+
+<p>
+Nu ken jij mij een beetje, graag wil ik ook kennis met jou maken.
+</p>
+
+<p>
+<button class="btn btn-purple" type="button" onclick="window.location.hash='about/en'">Read this in English</button>
+</p>
+
+            </div>
+            <div class="contact-container col-xs-12 col-sm-6">
+
+<img class="hidden-xs profile-photo" src="/img/sasha-tychkovska.jpg" alt="Sasha Tychkovska" />
+
+
+<h1>contact me</h1>
+<ul>
+    <li><a href="mailto:info@sasien.nl"><i class="fa fa-fw fa-envelope-square"></i> info@sasien.nl</a></li>
+    <li><a href="tel:+31614573883"><i class="fa fa-fw fa-phone-square"></i> +31 (0)6 1457 3883</a></li>
+    <li><a href="https://www.google.nl/maps/place/August+Vermeylenlaan+16,+5531+TW+Bladel/@51.3749127,5.2187756,17z/data=!3m1!4b1!4m2!3m1!1s0x47c6cf368393d519:0x167f72a41542c618?hl=en"><i class="fa fa-fw fa-map-marker"></i> Bladel</a></li>
+</ul>
+
+<img class="hidden-sm hidden-md hidden-lg profile-photo" src="/img/sasha-tychkovska.jpg" alt="Sasha Tychkovska" />
+
+            </div>
+        </div>
+    </div>
+</script>
