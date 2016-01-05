@@ -1,70 +1,18 @@
 import os
-import sys
 import logging
 import argparse
 import shutil
+import markdown
+from blogs import Blogs
+from blog import Blog
 from trender import TRender
-try:
-    import colorlog
-except ImportError:
-    pass
+from logger import setup_logger
+
 
 CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
 BUILD_DIR = os.path.join(CURRENT_DIR, 'build')
 STATIC_DIR = os.path.join(CURRENT_DIR, 'static')
 
-_MAP_LOGLEVELS = {
-    'DEBUG': logging.DEBUG,
-    'INFO': logging.INFO,
-    'WARNING': logging.WARNING,
-    'ERROR': logging.ERROR,
-    'CRITICAL': logging.CRITICAL
-}
-
-_LOG_DATE_FMT = '%y%m%d %H:%M:%S'
-
-def setup_logger(args):
-    '''Setup logger.
-
-    Positional arguments:
-        args: usually an argparse object since we expect attributes like
-        args.log_level etc.
-    '''
-    if 'colorlog' in sys.modules:
-        # setup colorized formatter
-        formatter = colorlog.ColoredFormatter(
-            fmt='%(log_color)s[%(levelname)1.1s %(asctime)s %(module)s' +
-                ':%(lineno)d]%(reset)s %(message)s',
-            datefmt=_LOG_DATE_FMT,
-            reset=True,
-            log_colors={
-                'DEBUG': 'cyan',
-                'INFO': 'green',
-                'WARNING': 'yellow',
-                'ERROR': 'red',
-                'CRITICAL': 'red,bg_white'},
-            secondary_log_colors={},
-            style='%')
-    else:
-        # setup formatter without using colors
-        formatter = logging.Formatter(
-            fmt='[%(levelname)1.1s %(asctime)s %(module)s:%(lineno)d] ' +
-                '%(message)s',
-            datefmt=_LOG_DATE_FMT,
-            style='%')
-
-    # create logger # TODO: Check if this is working
-    logger = logging.getLogger()
-
-    logger.setLevel(_MAP_LOGLEVELS[args.log_level.upper()])
-
-    # create console handler
-    ch = logging.StreamHandler()
-
-    # we can set the handler level to DEBUG since we control the root level
-    ch.setLevel(logging.DEBUG)
-    ch.setFormatter(formatter)
-    logger.addHandler(ch)
 
 def rmcontent(path):
     for name in map(lambda n: os.path.join(path, n), os.listdir(path)):
@@ -75,7 +23,6 @@ def rmcontent(path):
 
 
 if __name__ == '__main__':
-
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -101,7 +48,7 @@ if __name__ == '__main__':
         os.mkdir(BUILD_DIR)
 
     logging.info('Create index.html...')
-    template = TRender('base.template', os.path.join(CURRENT_DIR, 'templates'))
+    template = TRender('website.template', os.path.join(CURRENT_DIR, 'templates'))
     with open(os.path.join(BUILD_DIR, 'index.html'), 'w', encoding='utf8') as f:
         f.write(template.render({'debug': args.debug}))
 
@@ -119,3 +66,11 @@ if __name__ == '__main__':
 
     logging.info('Copying json data...')
     shutil.copy(os.path.join(STATIC_DIR, 'portfolio.json'), os.path.join(BUILD_DIR, 'portfolio.json'))
+
+    logging.info('Load blogs...')
+    path = os.path.join(CURRENT_DIR, 'blog')
+    blogs = Blogs()
+    for fn in map(lambda n: os.path.join(path, n), [fn for fn in os.listdir(path) if fn.endswith('.meta')]):
+        logging.info(fn)
+        blogs.add(Blog(fn))
+    logging.info(blogs)

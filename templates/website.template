@@ -1,0 +1,32 @@
+#extend base.template:
+#macro BODY:
+#include views/home.template
+#include views/portfolio.template
+#include views/about.template
+#include views/page-not-found.template
+
+<div class="container-fluid">
+  #include nav.template
+  <div id="view"></div>
+  #include footer.template
+</div>
+
+#if @debug:
+<script src="js/lib/jquery-2.1.1.js"></script>
+<script src="js/lib/jquery.mobile.custom.js"></script>
+<script src="js/lib/bootstrap.js"></script>
+<script src="js/lib/routie.js"></script>
+<script src="js/sasien.js"></script>
+<script src="js/wall.js"></script>
+<script src="js/gallery.js"></script>
+<script src="js/app.js"></script>
+<script src="js/router.js"></script>
+#else:
+<script src="js/lib/jquery-2.1.1.min.js"></script>
+<script src="js/lib/jquery.mobile.custom.min.js"></script>
+<script src="js/lib/bootstrap.min.js"></script>
+<script src="js/lib/routie.min.js"></script>
+<script src="js/app.min.js"></script>
+#end
+#end
+#end

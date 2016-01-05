@@ -1,0 +1,5 @@
+#extend base.template:
+#macro BODY:
+
+#end
+#end

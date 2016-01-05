@@ -5,10 +5,13 @@ import argparse
 import signal
 import datetime
 import configparser
+import logging
+from PIL import Image
 
 
 CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
 BLOG_DIR = os.path.join(CURRENT_DIR, 'blog')
+BLOG_GALLERY_IMAGE_WIDTH = 317
 
 def color_blue(s):
     return '\033[94m{}\x1b[0m'.format(s)
@@ -33,9 +36,22 @@ def get_blog_files(title):
 
     metafile = os.path.join(BLOG_DIR, '{}.meta'.format(filename))
     mdfile = os.path.join(BLOG_DIR, '{}.md'.format(filename))
+    jpgfile = os.path.join(BLOG_DIR, '{}.jpg'.format(filename))
 
-    return metafile, mdfile
+    return metafile, mdfile, jpgfile
 
+
+def resized_img(fn, maxwidth, maxheight=None, crop=False):
+    img = Image.open(fn)
+
+    wpercent = maxwidth / float(img.size[0])
+    wsize, hsize = maxwidth, int(float(img.size[1]) * float(wpercent))
+
+    if (not crop and maxheight and hsize > maxheight) or (crop and maxheight and hsize < maxheight):
+        hpercent = maxheight / float(img.size[1])
+        wsize, hsize =int(float(img.size[0]) * float(hpercent)), maxheight
+
+    return img.resize((wsize, hsize), Image.ANTIALIAS)
 
 
 def ask_string(title, default=None, func=lambda x: None):
@@ -58,15 +74,17 @@ def check_title(title):
     if not title:
         raise ValueError('Een titel is echt nodig!')
 
-    metafile, mdfile = get_blog_files(title)
-
-    if os.path.exists(metafile):
-        raise ValueError('Bestand {!r} bestaat al!'.format(metafile))
-
-    if os.path.exists(mdfile):
-        raise ValueError('Bestand {!r} bestaat al!'.format(mdfile))
+    for fn in get_blog_files(title):
+        if os.path.exists(fn):
+            raise ValueError('Bestand {!r} bestaat al!'.format(fn))
 
 
+def check_photo(photo):
+    if not photo:
+        raise ValueError('Een foto heeft je blog echt nodig!')
+
+    if not os.path.isfile(photo):
+        raise ValueError('Sorry, ik kan foto {!r} niet vinden!'.format(photo))
 
 
 def check_date(date):
@@ -81,18 +99,26 @@ def signal_handler(s, f):
 
 
 def create_post(args):
-    metafile, mdfile = get_blog_files(args.title)
+    metafile, mdfile, jpgfile = get_blog_files(args.title)
 
     config = configparser.RawConfigParser()
     config['blog_post'] = {
         'Title': args.title,
-        'Date': args.date
+        'Date': args.date,
+        'Photo': jpgfile,
+        'Content': mdfile
     }
     with open(metafile, 'w', encoding='utf-8') as f:
         config.write(f)
 
     with open(mdfile, 'w', encoding='utf-8') as f:
         f.write('\n'.join([args.title, '=' * len(args.title)]))
+
+    img = resized_img(fn=args.photo, maxwidth=BLOG_GALLERY_IMAGE_WIDTH)
+    img.save(jpgfile)
+
+    print('Finished creating blog \'{}\''.format(color_yellow(args.title)))
+
 
 
 if __name__ == '__main__':
@@ -114,6 +140,13 @@ if __name__ == '__main__':
         default='',
         help='Blog datum')
 
+    parser.add_argument(
+        '-p',
+        '--photo',
+        type=str,
+        default='',
+        help='Blog (title) photo')
+
     args = parser.parse_args()
 
     try:
@@ -130,5 +163,13 @@ if __name__ == '__main__':
             title='Type een datum voor je nieuwe blog post',
             default=str(datetime.date.today()),
             func=check_date)
+
+    try:
+        check_date(args.photo)
+    except:
+        args.photo = ask_string(
+            title='Type de locatie van de foto die je wilt gebruiken voor je nieuwe blog post',
+            default='src/blog.jpg',
+            func=check_photo)
 
     create_post(args)
