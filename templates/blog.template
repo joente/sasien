@@ -1,5 +1,14 @@
 #extend base.template:
 #macro BODY:
 
+<div class="container-fluid">
+    #include nav.template
+    <div class="blog container">
+        @blog
+        <p class="blog-overview"><a href="/blog">BLOG OVERZICHT</a></p>
+    </div>
+    #include footer.template
+</div>
+
 #end
 #end

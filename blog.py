@@ -2,7 +2,7 @@ import os
 import datetime
 import configparser
 import markdown
-
+import helpers
 
 SECTION = 'blog_post'
 
@@ -15,8 +15,10 @@ class Blog:
 
         self.date = datetime.datetime.strptime(config.get(SECTION, 'Date'), '%Y-%m-%d')
         self.title = config.get(SECTION, 'Title')
-        self.photo = config.get(SECTION, 'Photo')
-        mdfile = config.get(SECTION, 'Content')
+        self.photo = os.path.join('/', 'img', 'blog', config.get(SECTION, 'Photo'))
+        self.name = config.get(SECTION, 'Name')
+        self.target = os.path.join('/', 'blog', helpers.htmlname(self.name))
+        mdfile = os.path.join(os.path.dirname(metafile), config.get(SECTION, 'Content'))
 
         with open(mdfile, 'r', encoding='utf-8') as f:
             self.html = markdown.markdown(f.read(), output_format='html5')

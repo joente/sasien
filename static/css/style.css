@@ -1,5 +1,5 @@
 body {
-    color: #000;
+    color: #555;
     padding-top: 20px;
     font-family: 'Josefin Sans', sans-serif;
     border-right: 1px solid #000;
@@ -42,7 +42,7 @@ h1 {
 }
 
 .navbar-default .navbar-brand {
-    color: #000;
+    color: #555;
     margin-left: -15px;
 }
 .navbar-right {
@@ -56,7 +56,7 @@ h1 {
     font-weight: 500;
 }
 .navbar-default .navbar-nav > li > a {
-    color: #000;
+    color: #555;
 }
 
 .navbar-default .navbar-nav > .open > a,
@@ -80,7 +80,7 @@ h1 {
 #nav-portfolio-view.open > a,
 #nav-portfolio-view > a:focus,
 #nav-portfolio-view > a:hover {
-    background: url('/img/nav-top.png?v3') 0 6px no-repeat;
+    background: url('/img/nav-top.png?v5') 0 6px no-repeat;
 }
 #nav-about-view {
     width: 157px;
@@ -88,7 +88,15 @@ h1 {
 #nav-about-view.active > a,
 #nav-about-view > a:focus,
 #nav-about-view > a:hover {
-    background: url('/img/nav-top.png') -120px 6px no-repeat;
+    background: url('/img/nav-top.png?v5') -280px 6px no-repeat;
+}
+#nav-blog-view {
+    width: 77px;
+}
+#nav-blog-view.active > a,
+#nav-blog-view > a:focus,
+#nav-blog-view > a:hover {
+    background: url('/img/nav-top.png?v7') -156px 6px no-repeat;
 }
 
 .navbar-collapse {
@@ -374,4 +382,86 @@ h1 {
     max-width: 70%;
     border-radius: 8px;
     box-shadow: 2px 2px 2px -2px #888;
+}
+
+.blog-container {
+    padding: 0;
+}
+
+.blog-gallery > div {
+    opacity: 1;
+    position: relative;
+    padding: 5px;
+}
+
+.blog-gallery > div > a > img {
+    width: 100%;
+}
+
+.blog-overlay {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    background-color: #fff;
+    opacity: 0;
+    z-index: 100;
+    text-align: center;
+    padding-top: 60px;
+    color: #444;
+    font-size: 25px;
+}
+
+@media (min-width: 768px) {
+    .blog-overlay {
+        padding-top: 85px;
+    }
+}
+
+.blog-overlay:hover {
+    opacity: 0.85;
+    -webkit-transition: opacity 0.3s ease-in-out;
+    -moz-transition: opacity 0.3s ease-in-out;
+    -o-transition: opacity 0.3s ease-in-out;
+    -ms-transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.blog {
+    text-align: center;
+    font-size: 17px;
+    padding-top: 20px;
+}
+
+.blog h2,
+.blog h3,
+.blog h4 {
+    color: #c67df4
+}
+
+.blog blockquote {
+    background-color: rgba(232, 229, 232, 0.21);
+    border: 1px solid rgba(203, 185, 206, 0.13);
+    margin-bottom: 10px;
+}
+
+.blog h1,
+.blog h2,
+.blog h3,
+.blog h4 {
+    margin-top: 0;
+}
+.blog h1 + p,
+.blog h2 + p,
+.blog h3 + p,
+.blog h4 + p {
+    margin-top: 30px;
+}
+.blog img {
+    margin-bottom: 10px;
+    width: 100%;
+}
+.blog-overview {
+    margin-top: 20px;
 }

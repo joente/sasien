@@ -1,0 +1,22 @@
+#extend base.template:
+#macro BODY:
+
+<div class="container-fluid">
+    #include nav.template
+    <div class="blog-container container">
+        <div class="row blog-gallery">
+            #for @blog in @blogs:
+            <div class="blog-gallery-item col-xs-6 col-md-4">
+                <a href="@blog.target">
+                    <div class="blog-overlay">@blog.title</div>
+                    <img src="@blog.photo" alt="@blog.title" />
+                </a>
+            </div>
+            #end
+        </div>
+  </div>
+  #include footer.template
+</div>
+
+#end
+#end

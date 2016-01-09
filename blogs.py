@@ -11,6 +11,9 @@ class Blogs:
             n = len(self.blogs)
         self.blogs.insert(n, blog)
 
+    def __iter__(self):
+        return iter(self.blogs)
+
     def __str__(self):
         return '\nNumber of blogs: {}\n{}\n{}'.format(
             len(self.blogs),

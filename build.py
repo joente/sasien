@@ -3,10 +3,12 @@ import logging
 import argparse
 import shutil
 import markdown
+import functools
 from blogs import Blogs
 from blog import Blog
 from trender import TRender
 from logger import setup_logger
+import helpers
 
 
 CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -23,6 +25,7 @@ def rmcontent(path):
 
 
 if __name__ == '__main__':
+    trender = functools.partial(TRender, path=os.path.join(CURRENT_DIR, 'templates'))
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -47,13 +50,24 @@ if __name__ == '__main__':
         logging.info('Create build folder: {}...'.format(BUILD_DIR))
         os.mkdir(BUILD_DIR)
 
+    logging.info('Create blog folder...')
+    os.mkdir(os.path.join(BUILD_DIR, 'blog'))
+
     logging.info('Create index.html...')
-    template = TRender('website.template', os.path.join(CURRENT_DIR, 'templates'))
+    template = trender('website.template')
     with open(os.path.join(BUILD_DIR, 'index.html'), 'w', encoding='utf8') as f:
-        f.write(template.render({'debug': args.debug}))
+        f.write(template.render({
+            'debug': args.debug,
+            'title': 'Sasien Photography'}))
 
     logging.info('Copying website images...')
     shutil.copytree(os.path.join(STATIC_DIR, 'img'), os.path.join(BUILD_DIR, 'img'))
+
+    logging.info('Copying blog images...')
+    shutil.copytree(os.path.join(CURRENT_DIR, 'blog', 'photos'), os.path.join(BUILD_DIR, 'img', 'blog'))
+
+    logging.info('Remove .index from build dir...')
+    os.unlink(os.path.join(BUILD_DIR, 'img', 'blog', '.index'))
 
     logging.info('Copying website stylesheets...')
     shutil.copytree(os.path.join(STATIC_DIR, 'css'), os.path.join(BUILD_DIR, 'css'))
@@ -71,6 +85,30 @@ if __name__ == '__main__':
     path = os.path.join(CURRENT_DIR, 'blog')
     blogs = Blogs()
     for fn in map(lambda n: os.path.join(path, n), [fn for fn in os.listdir(path) if fn.endswith('.meta')]):
-        logging.info(fn)
         blogs.add(Blog(fn))
     logging.info(blogs)
+
+    logging.info('Read recent blogs...')
+
+    gallery_blogs = [{
+        'target': blog.target,
+        'title': blog.title,
+        'photo': blog.photo} for blog in blogs]
+
+    blog_gallery_template = trender('blog-gallery.template')
+    with open(os.path.join(BUILD_DIR, 'blog', 'index.html'), 'w', encoding='utf8') as f:
+        f.write(blog_gallery_template.render({
+            'debug': args.debug,
+            'blogs': gallery_blogs}))
+
+    for blog in blogs:
+        blog_template = trender('blog.template')
+        blog.path = os.path.join(BUILD_DIR, 'blog', helpers.htmlname(blog.name))
+        logging.info('create blog path: {}'.format(blog.path))
+        os.mkdir(blog.path)
+        with open(os.path.join(blog.path, 'index.html'), 'w', encoding='utf8') as f:
+            f.write(blog_template.render({
+                'debug': args.debug,
+                'title': blog.title,
+                'blog': blog.html}))
+
