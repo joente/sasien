@@ -1,4 +1,9 @@
 #extend base.template:
+
+#macro META:
+<meta name="description" content="Affordable family and events photography without compromise on quality and time">
+#end
+
 #macro BODY:
 #include views/home.template
 #include views/portfolio.template
@@ -10,6 +15,6 @@
   <div id="view"></div>
   #include footer.template
 </div>
-
 #end
+
 #end

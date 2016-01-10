@@ -66,6 +66,9 @@ if __name__ == '__main__':
     logging.info('Copying blog images...')
     shutil.copytree(os.path.join(CURRENT_DIR, 'blog', 'photos'), os.path.join(BUILD_DIR, 'img', 'blog'))
 
+    logging.info('Copying facebook images...')
+    shutil.copytree(os.path.join(CURRENT_DIR, 'blog', 'fb'), os.path.join(BUILD_DIR, 'img', 'fb'))
+
     logging.info('Remove .index from build dir...')
     os.unlink(os.path.join(BUILD_DIR, 'img', 'blog', '.index'))
 
@@ -110,5 +113,7 @@ if __name__ == '__main__':
             f.write(blog_template.render({
                 'debug': args.debug,
                 'title': blog.title,
-                'blog': blog.html}))
+                'blog': blog.html,
+                'description': blog.description,
+                'fb': blog.fb}))
 

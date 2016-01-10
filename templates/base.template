@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+#META
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-<meta name="description" content="Affordable family and events photography without compromise on quality and time">
-<meta name="keywords" content="Photography,Bladel,Eindhoven,Tilburg,Hilvarenbeek,Reusel,Hapert,Eersel,Foto,Photo,Veldhoven,Familie,Family,Kids,Kinderen,Portraid,Wedding,Bruiloft,Sasha,Tychkovska">
 <meta name="author" content="Jeroen van der Heijden">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="keywords" content="Photography,Bladel,Eindhoven,Tilburg,Hilvarenbeek,Reusel,Hapert,Eersel,Foto,Photo,Veldhoven,Familie,Family,Kids,Kinderen,Portraid,Wedding,Bruiloft,Sasha,Tychkovska">
 <meta charset="utf-8" />
 <title>@title</title>
 #if @debug:

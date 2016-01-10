@@ -1,4 +1,14 @@
 #extend base.template:
+
+#macro META:
+<meta name="description" content="@description">
+<meta property="og:url" content="@fb.url" />
+<meta property="og:type" content="@fb.type" />
+<meta property="og:title" content="@fb.title" />
+<meta property="og:description" content="@fb.description" />
+<meta property="og:image" content="@fb.image" />
+#end
+
 #macro BODY:
 
 <div class="container-fluid">

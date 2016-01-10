@@ -1,4 +1,9 @@
 #extend base.template:
+
+#macro META:
+<meta name="description" content="Affordable family and events photography without compromise on quality and time">
+#end
+
 #macro BODY:
 
 <div class="container-fluid">

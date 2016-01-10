@@ -13,13 +13,20 @@ class Blog:
         config = configparser.RawConfigParser()
         config.read(metafile)
 
-        self.date = datetime.datetime.strptime(config.get(SECTION, 'Date'), '%Y-%m-%d')
-        self.title = config.get(SECTION, 'Title')
-        self.photo = os.path.join('/', 'img', 'blog', config.get(SECTION, 'Photo'))
-        self.name = config.get(SECTION, 'Name')
+        self.date = datetime.datetime.strptime(config.get(SECTION, 'date'), '%Y-%m-%d')
+        self.title = config.get(SECTION, 'title')
+        self.photo = os.path.join('/', 'img', 'blog', config.get(SECTION, 'photo'))
+        self.name = config.get(SECTION, 'name')
         self.target = os.path.join('/', 'blog', helpers.htmlname(self.name))
-        mdfile = os.path.join(os.path.dirname(metafile), config.get(SECTION, 'Content'))
+        self.description = config.get(SECTION, 'fb-description')
+        self.fb = {
+            'url': 'http://sasien.nl/blog/{}/'.format(helpers.htmlname(self.name)),
+            'type': 'article',
+            'image': 'http://sasien.nl/img/fb/{}'.format(config.get(SECTION, 'fb-image')),
+            'title': config.get(SECTION, 'fb-title'),
+            'description': self.description}
 
+        mdfile = os.path.join(os.path.dirname(metafile), config.get(SECTION, 'content'))
         with open(mdfile, 'r', encoding='utf-8') as f:
             self.html = markdown.markdown(f.read(), output_format='html5')
 

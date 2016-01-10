@@ -8,6 +8,7 @@ import configparser
 import logging
 import helpers
 
+
 CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
 PHOTO_DIR = os.path.join(CURRENT_DIR, 'blog', 'photos')
 BLOG_IMAGE_WIDTH = 939
@@ -18,6 +19,7 @@ def get_name(photo):
     if not name:
         raise ValueError('Sorry, kun je de foto een andere naam geven? van deze naam snap ik niets...')
     return name
+
 
 def check_photo(photo):
     if not photo:
@@ -48,6 +50,7 @@ def add_photo(args):
 
     print('Je kunt de foto gebruiken met {}'.format(helpers.color_yellow('![Title]({})'.format(
         os.path.join('/', 'img', 'blog', os.path.basename(jpgfile))))))
+
 
 if __name__ == '__main__':
     helpers.handlectrlc()

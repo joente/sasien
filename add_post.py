@@ -13,7 +13,7 @@ BLOG_DIR = os.path.join(CURRENT_DIR, 'blog')
 PHOTO_DIR = os.path.join(BLOG_DIR, 'photos')
 BLOG_GALLERY_IMAGE_WIDTH = 317
 BLOG_GALLERY_IMAGE_HEIGHT = 211
-
+FB_IMAGE_WIDTH = 1200
 
 
 def get_blog_files(title):
@@ -25,8 +25,9 @@ def get_blog_files(title):
     metafile = os.path.join(BLOG_DIR, '{}.meta'.format(filename))
     mdfile = os.path.join(BLOG_DIR, '{}.md'.format(filename))
     jpgfile = os.path.join(BLOG_DIR, 'photos', '{}.jpg'.format(filename))
+    fbimage = os.path.join(BLOG_DIR, 'fb', '{}.jpg'.format(filename))
 
-    return metafile, mdfile, jpgfile, filename
+    return metafile, mdfile, jpgfile, fbimage, filename
 
 
 def check_title(title):
@@ -36,6 +37,11 @@ def check_title(title):
     for fn in get_blog_files(title):
         if os.path.exists(fn):
             raise ValueError('Bestand {!r} bestaat al!'.format(fn))
+
+
+def check_description(description):
+    if not description:
+        raise ValueError('Een omschrijving is echt nodig!')
 
 
 def check_photo(photo):
@@ -60,15 +66,18 @@ def check_date(date):
 
 
 def create_post(args):
-    metafile, mdfile, jpgfile, name = get_blog_files(args.title)
+    metafile, mdfile, jpgfile, fbimage, name = get_blog_files(args.title)
 
     config = configparser.RawConfigParser()
     config['blog_post'] = {
-        'Name': name,
-        'Title': args.title,
-        'Date': args.date,
-        'Photo': os.path.basename(jpgfile),
-        'Content': os.path.basename(mdfile)
+        'name': name,
+        'title': args.title,
+        'date': args.date,
+        'photo': os.path.basename(jpgfile),
+        'content': os.path.basename(mdfile),
+        'fb-title': args.title,
+        'fb-description': args.description,
+        'fb-image': os.path.basename(fbimage),
     }
 
     date = datetime.datetime.strptime(args.date, '%Y-%m-%d')
@@ -87,6 +96,9 @@ def create_post(args):
     index.add(name)
     helpers.save_photo_index(index, path=PHOTO_DIR)
 
+    img = helpers.resized_img(fn=args.photo, maxwidth=FB_IMAGE_WIDTH)
+    img.save(fbimage)
+
     print('Finished creating blog \'{}\''.format(helpers.color_yellow(args.title)))
 
 
@@ -100,6 +112,13 @@ if __name__ == '__main__':
         type=str,
         default='',
         help='Blog titel')
+
+    parser.add_argument(
+        '-i',
+        '--description',
+        type=str,
+        default='',
+        help='Blog description (facebook)')
 
     parser.add_argument(
         '-d',
@@ -123,6 +142,13 @@ if __name__ == '__main__':
         args.title = helpers.ask_string(
             title='Type een titel voor je nieuwe blog post',
             func=check_title)
+
+    try:
+        check_description(args.description)
+    except:
+        args.description = helpers.ask_string(
+            title='Type een omschrijving (voor facebook)',
+            func=check_description)
 
     try:
         check_date(args.date)

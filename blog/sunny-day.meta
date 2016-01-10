@@ -1,7 +1,10 @@
 [blog_post]
-photo = sunny-day.jpg
-date = 2016-01-09
-title = Sunny day
-name = sunny-day
+date = 2016-01-10
+fb-description = Wat een mooie en zonnige dag!
 content = sunny-day.md
+photo = sunny-day.jpg
+name = sunny-day
+fb-image = sunny-day.jpg
+fb-title = Sunny day!
+title = Sunny day!
 
