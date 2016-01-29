@@ -91,8 +91,6 @@ if __name__ == '__main__':
         blogs.add(Blog(fn))
     logging.info(blogs)
 
-    logging.info('Read recent blogs...')
-
     gallery_blogs = [{
         'target': blog.target,
         'title': blog.title,

@@ -1,7 +1,7 @@
 #extend base.template:
 
 #macro META:
-<meta name="description" content="Affordable family and events photography without compromise on quality and time">
+#include defmeta.template
 #end
 
 #macro BODY:
