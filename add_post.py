@@ -99,6 +99,8 @@ def create_post(args):
     img = helpers.resized_img(fn=args.photo, maxwidth=FB_IMAGE_WIDTH)
     img.save(fbimage)
 
+    os.mkdir(os.path.join(BLOG_DIR, 'photos', name))
+
     print('Finished creating blog \'{}\''.format(helpers.color_yellow(args.title)))
 
 
