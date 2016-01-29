@@ -75,3 +75,5 @@ if __name__ == '__main__':
             func=check_photo)
 
     add_photo(args)
+
+    input()
