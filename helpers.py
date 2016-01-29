@@ -52,11 +52,13 @@ def unique(name, index):
 
 
 def color_blue(s):
-    return '\033[94m{}\x1b[0m'.format(s)
+    # '\033[94m{}\x1b[0m'.format(s)
+    return s
 
 
 def color_yellow(s):
-    return '\x1b[33m{}\x1b[0m'.format(s)
+    # '\x1b[33m{}\x1b[0m'.format(s)
+    return s
 
 
 def get_input(default):
