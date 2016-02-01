@@ -22,7 +22,7 @@ def month(date):
 
 def resized_img(img, maxwidth, maxheight=None, crop=False):
     if isinstance(img, str):
-        img = Image.open(fn)
+        img = Image.open(img)
 
     wpercent = maxwidth / float(img.size[0])
     wsize, hsize = maxwidth, int(float(img.size[1]) * float(wpercent))
