@@ -4,11 +4,15 @@ import argparse
 import shutil
 import markdown
 import functools
+from slimit import minify
+from csscompressor import compress
 from blogs import Blogs
 from blog import Blog
 from trender import TRender
 from logger import setup_logger
+from resize import resize
 import helpers
+
 
 
 CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -22,6 +26,44 @@ def rmcontent(path):
             shutil.rmtree(name)
         elif os.path.isfile(name):
             os.unlink(name)
+
+
+def min_js():
+    #################################################
+    # Minify app js
+    #################################################
+
+    content = []
+
+    with open(os.path.join(STATIC_DIR, 'js', 'sasien.js'), 'r') as f:
+        content.append(f.read())
+
+    with open(os.path.join(STATIC_DIR, 'js', 'wall.js'), 'r') as f:
+        content.append(f.read())
+
+    with open(os.path.join(STATIC_DIR, 'js', 'gallery.js'), 'r') as f:
+        content.append(f.read())
+
+    with open(os.path.join(STATIC_DIR, 'js', 'app.js'), 'r') as f:
+        content.append(f.read())
+
+    with open(os.path.join(STATIC_DIR, 'js', 'router.js'), 'r') as f:
+        content.append(f.read())
+
+    with open(os.path.join(STATIC_DIR, 'js', 'app.min.js'), 'w') as f:
+        f.write(minify(''.join(content), mangle=True, mangle_toplevel=True))
+
+
+def min_css():
+    #################################################
+    # Minify css
+    #################################################
+
+    with open(os.path.join(STATIC_DIR, 'css', 'style.css'), 'r') as f:
+        content = f.read()
+
+    with open(os.path.join(STATIC_DIR, 'css', 'style.min.css'), 'w') as f:
+        f.write(compress(content))
 
 
 if __name__ == '__main__':
@@ -39,9 +81,16 @@ if __name__ == '__main__':
         choices=['debug', 'info', 'warning', 'error'])
     args = parser.parse_args()
 
-    args.debug = True
+    setup_logger(args.log_level)
 
-    setup_logger(args)
+    logging.info('Resize images...')
+    resize()
+
+    logging.info('Minify js files...')
+    min_js()
+
+    logging.info('Minify css files...')
+    min_css()
 
     if os.path.isdir(BUILD_DIR):
         logging.info('Empty existing build folder: {}...'.format(BUILD_DIR))
@@ -68,9 +117,6 @@ if __name__ == '__main__':
 
     logging.info('Copying facebook images...')
     shutil.copytree(os.path.join(CURRENT_DIR, 'blog', 'fb'), os.path.join(BUILD_DIR, 'img', 'fb'))
-
-    logging.info('Remove .index from build dir...')
-    os.unlink(os.path.join(BUILD_DIR, 'img', 'blog', '.index'))
 
     logging.info('Copying website stylesheets...')
     shutil.copytree(os.path.join(STATIC_DIR, 'css'), os.path.join(BUILD_DIR, 'css'))

@@ -5,7 +5,6 @@ import argparse
 import signal
 import datetime
 import configparser
-import logging
 import helpers
 
 CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -54,7 +53,7 @@ def check_photo(photo):
     if not photo.lower().endswith('.jpg'):
         raise ValueError('Sorry, ik span alleen .jpg foto\'s!')
 
-    img = helpers.resized_img(fn=photo, maxwidth=BLOG_GALLERY_IMAGE_WIDTH)
+    img = helpers.resized_img(img=photo, maxwidth=BLOG_GALLERY_IMAGE_WIDTH)
     if not helpers.approx(BLOG_GALLERY_IMAGE_HEIGHT, img.size[1]):
         raise ValueError('Sorry, de foto moet een verhouding hebben van 3x2 en deze foto is {}x{}!'.format(img.size[0], img.size[1]))
 
@@ -89,19 +88,15 @@ def create_post(args):
         f.write('\n'.join([args.title, '=' * len(args.title), '', '###{} {} {}'.format(
             date.day, helpers.month(date), date.year)]))
 
-    img = helpers.resized_img(fn=args.photo, maxwidth=BLOG_GALLERY_IMAGE_WIDTH)
+    img = helpers.resized_img(img=args.photo, maxwidth=BLOG_GALLERY_IMAGE_WIDTH)
     img.save(jpgfile)
 
-    index = helpers.load_photo_index(path=PHOTO_DIR)
-    index.add(name)
-    helpers.save_photo_index(index, path=PHOTO_DIR)
-
-    img = helpers.resized_img(fn=args.photo, maxwidth=FB_IMAGE_WIDTH)
+    img = helpers.resized_img(img=args.photo, maxwidth=FB_IMAGE_WIDTH)
     img.save(fbimage)
 
     os.mkdir(os.path.join(BLOG_DIR, 'photos', name))
 
-    print('Finished creating blog \'{}\''.format(helpers.color_yellow(args.title)))
+    print('Finished creating blog \'{}\''.format(args.title))
 
 
 if __name__ == '__main__':

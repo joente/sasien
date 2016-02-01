@@ -16,12 +16,11 @@ _MAP_LOGLEVELS = {
 
 _LOG_DATE_FMT = '%y%m%d %H:%M:%S'
 
-def setup_logger(args):
+def setup_logger(log_level):
     '''Setup logger.
 
     Positional arguments:
-        args: usually an argparse object since we expect attributes like
-        args.log_level etc.
+        log_level: Log level. 'debug', 'info' etc.
     '''
     if 'colorlog' in sys.modules:
         # setup colorized formatter
@@ -49,7 +48,7 @@ def setup_logger(args):
     # create logger # TODO: Check if this is working
     logger = logging.getLogger()
 
-    logger.setLevel(_MAP_LOGLEVELS[args.log_level.upper()])
+    logger.setLevel(_MAP_LOGLEVELS[log_level.upper()])
 
     # create console handler
     ch = logging.StreamHandler()
