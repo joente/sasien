@@ -14,10 +14,10 @@ from resize import resize
 import helpers
 
 
-
 CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
 BUILD_DIR = os.path.join(CURRENT_DIR, 'build')
 STATIC_DIR = os.path.join(CURRENT_DIR, 'static')
+DEBUG = False
 
 
 def rmcontent(path):
@@ -70,10 +70,18 @@ if __name__ == '__main__':
     trender = functools.partial(TRender, path=os.path.join(CURRENT_DIR, 'templates'))
 
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        '-d', '--debug',
-        action='store_true',
-        help='Build in debug mode')
+
+    if DEBUG:
+        parser.add_argument(
+            '-d', '--debug',
+            action='store_false',
+            help='Disable debug mode')
+    else:
+        parser.add_argument(
+            '-d', '--debug',
+            action='store_true',
+            help='Enable debug mode')
+
     parser.add_argument(
         '-l', '--log-level',
         default='info',
@@ -86,11 +94,12 @@ if __name__ == '__main__':
     logging.info('Resize images...')
     resize()
 
-    logging.info('Minify js files...')
-    min_js()
+    if not args.debug:
+        logging.info('Minify js files...')
+        min_js()
 
-    logging.info('Minify css files...')
-    min_css()
+        logging.info('Minify css files...')
+        min_css()
 
     if os.path.isdir(BUILD_DIR):
         logging.info('Empty existing build folder: {}...'.format(BUILD_DIR))
