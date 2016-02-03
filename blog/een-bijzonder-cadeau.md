@@ -3,9 +3,9 @@ Een bijzonder cadeau
 
 ###1 oktober 2015
 
-Het was een heerlijke avond in october toen we met Nissa en haar mama op pad gingen voor leuke foto’s voor papa van Nissa. Ze wilden een cadeau geven voor zijn verjaardag, een bijzondere cadeau die hij altijd mee mocht nemen als hij ver van huis was.
+Het was een heerlijke avond in october toen we met Nissa en haar mama op pad gingen voor leuke foto's voor papa van Nissa. Ze wilden een cadeau geven voor zijn verjaardag, een bijzondere cadeau die hij altijd mee mocht nemen als hij ver van huis was.
 
-Nissa heeft een broertje, Remi, hij kijkt elke dag naar mama, papa en zijn kleine zusje van boven, hij is altijd in hun gedachten. Het was heel bijzonder voor mij om de grootste droom van de ouders van Remi en Nissa te vervullen, hun kinderen samen brengen, al was het maar op de foto. 
+Nissa heeft een broertje, Remi, hij kijkt elke dag naar mama, papa en zijn kleine zusje van boven, hij is altijd in hun gedachten. Het was heel bijzonder voor mij om de grootste droom van de ouders van Remi en Nissa te vervullen, hun kinderen samen brengen, al was het maar op de foto.
 
 Jullie hebben alle vier een speciale plek in mijn hart.
 
