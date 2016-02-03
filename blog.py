@@ -23,6 +23,9 @@ class Blog:
             'url': 'http://sasien.nl/blog/{}/'.format(helpers.htmlname(self.name)),
             'type': 'article',
             'image': 'http://sasien.nl/img/fb/{}'.format(config.get(SECTION, 'fb-image')),
+            'image_type': config.get(SECTION, 'fb-image-type'),
+            'image_width': config.get(SECTION, 'fb-image-width'),
+            'image_height': config.get(SECTION, 'fb-image-height'),
             'title': config.get(SECTION, 'fb-title'),
             'description': self.description}
 

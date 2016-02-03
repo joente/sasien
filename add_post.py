@@ -67,6 +67,18 @@ def check_date(date):
 def create_post(args):
     metafile, mdfile, jpgfile, fbimage, name = get_blog_files(args.title)
 
+    date = datetime.datetime.strptime(args.date, '%Y-%m-%d')
+
+    with open(mdfile, 'w', encoding='utf-8') as f:
+        f.write('\n'.join([args.title, '=' * len(args.title), '', '###{} {} {}'.format(
+            date.day, helpers.month(date), date.year)]))
+
+    post_img = helpers.resized_img(img=args.photo, maxwidth=BLOG_GALLERY_IMAGE_WIDTH)
+    post_img.save(jpgfile)
+
+    fb_img = helpers.resized_img(img=args.photo, maxwidth=FB_IMAGE_WIDTH)
+    fb_img.save(fbimage)
+
     config = configparser.RawConfigParser()
     config['blog_post'] = {
         'name': name,
@@ -77,22 +89,13 @@ def create_post(args):
         'fb-title': args.title,
         'fb-description': args.description,
         'fb-image': os.path.basename(fbimage),
+        'fb-image-type': 'image/jpeg',
+        'fb-image-width': fb_img.size[0],
+        'fb-image-height': fb_img.size[1]
     }
-
-    date = datetime.datetime.strptime(args.date, '%Y-%m-%d')
 
     with open(metafile, 'w', encoding='utf-8') as f:
         config.write(f)
-
-    with open(mdfile, 'w', encoding='utf-8') as f:
-        f.write('\n'.join([args.title, '=' * len(args.title), '', '###{} {} {}'.format(
-            date.day, helpers.month(date), date.year)]))
-
-    img = helpers.resized_img(img=args.photo, maxwidth=BLOG_GALLERY_IMAGE_WIDTH)
-    img.save(jpgfile)
-
-    img = helpers.resized_img(img=args.photo, maxwidth=FB_IMAGE_WIDTH)
-    img.save(fbimage)
 
     os.mkdir(os.path.join(BLOG_DIR, 'photos', name))
 

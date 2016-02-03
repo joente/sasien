@@ -4,3 +4,6 @@
 <meta property="og:title" content="Sasien Photography" />
 <meta property="og:description" content="Affordable family and events photography without compromise on quality and time" />
 <meta property="og:image" content="http://sasien.nl/img/fb-sasien.jpg" />
+<mete property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="650" />
