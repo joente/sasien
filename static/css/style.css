@@ -400,22 +400,23 @@ h1 {
 
 .blog-overlay {
     position: absolute;
-    top: 5px;
-    bottom: 5px;
-    left: 5px;
-    right: 5px;
+    top: 4px;
+    bottom: 4px;
+    left: 4px;
+    right: 4px;
     background-color: #fff;
     opacity: 0;
     z-index: 100;
     text-align: center;
-    padding-top: 60px;
+    padding: 35px 5px 0 5px;
     color: #444;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 @media (min-width: 768px) {
     .blog-overlay {
-        padding-top: 85px;
+        padding: 85px 5px 0 5px;
+        font-size: 25px;
     }
 }
 
