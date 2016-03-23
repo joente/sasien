@@ -150,7 +150,7 @@ if __name__ == '__main__':
     gallery_blogs = [{
         'target': blog.target,
         'title': blog.title,
-        'photo': blog.photo} for blog in blogs]
+        'photo': blog.photo} for blog in blogs if not blog.name.startswith('_')]
 
     blog_gallery_template = trender('blog-gallery.template')
     with open(os.path.join(BUILD_DIR, 'blog', 'index.html'), 'w', encoding='utf8') as f:

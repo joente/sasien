@@ -35,8 +35,10 @@ def resized_img(img, maxwidth, maxheight=None, crop=False):
 
 
 def htmlname(name, filter_chars=re.compile('[^a-zA-Z0-9_\-]')):
+    hidden = name.startswith('_')
     name = name.lower().replace(' ', '-').replace('_', '-')
-    return filter_chars.sub('', name)
+    name = filter_chars.sub('', name)
+    return '_{}'.format(name[1:]) if hidden else name
 
 # alias for htmlname
 filename = htmlname
