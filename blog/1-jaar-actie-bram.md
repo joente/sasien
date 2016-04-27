@@ -3,7 +3,7 @@
 
 ###20 april 2016
 
-Hoi Anneke, hier zijn de foto's van jullie knapperd! en nog een fototje met lieve Yanne, hihi
+Hoi Anke, hier zijn de foto's van jullie knapperd! En nog een fototje met lieve Yanne, hihi
 
 Kijk maar bij de foto's en laat me alsjeblieft weten welke foto jullie gratis willen. 
 
