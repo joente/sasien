@@ -5,7 +5,7 @@
 
 Hoi Sandra, een shoot van Elin is langzaam uitgekomen in een shoot van Elin en Isa. Ik vind het zelf nog leuker, hihi.
 
-Een dif=gitale foto naar keuze is gratis, als jullie meer foto's willen bijbestellen (digitaal, hoge resolutie, zonder logo's), hier zijn de prijzen:
+Een digitale foto naar keuze is gratis, als jullie meer foto's willen bijbestellen (digitaal, hoge resolutie, zonder logo's), hier zijn de prijzen:
 
 Losse foto's = 6 euro/foto
 
