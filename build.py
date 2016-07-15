@@ -137,6 +137,9 @@ if __name__ == '__main__':
     logging.info('Copying favicon...')
     shutil.copy(os.path.join(STATIC_DIR, 'favicon.ico'), os.path.join(BUILD_DIR, 'favicon.ico'))
 
+    logging.info('Copying BingSiteAuth.xml...')
+    shutil.copy(os.path.join(STATIC_DIR, 'BingSiteAuth.xml'), os.path.join(BUILD_DIR, 'favicon.ico'))
+
     logging.info('Copying json data...')
     shutil.copy(os.path.join(STATIC_DIR, 'portfolio.json'), os.path.join(BUILD_DIR, 'portfolio.json'))
 
